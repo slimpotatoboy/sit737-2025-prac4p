@@ -135,7 +135,8 @@ app.get("/exponent", (req, res) => {
 app.get("/sqrt", (req, res) => {
   try {
     const n1 = parseInt(req.query.n1);
-    if (!checkForValidInput(n1)) {
+    if (isNaN(n1)) {
+      logger.log({ level: "error", message: `Invalid input ${n1}` });
       return res.status(400).json({ statuscode: 400, error: "Invalid Input" });
     }
     const result = sqrtNumber(n1);
