@@ -34,6 +34,20 @@ const divTwoNumber = (n1, n2) => {
   return n1 / n2;
 };
 
+// exponentiation of two numbers
+const expTwoNumber = (n1, n2) => {
+  return Math.pow(n1, n2);
+};
+// square root of a number
+const sqrtNumber = (n1) => {
+  return Math.sqrt(n1);
+};
+
+// modulo operation of two numbers
+const modTwoNumber = (n1, n2) => {
+  return n1 % n2;
+};
+
 // check for valid input
 const checkForValidInput = (n1, n2) => {
   if (isNaN(n1) || isNaN(n2)) {
@@ -97,6 +111,48 @@ app.get("/divide", (req, res) => {
       return res.status(400).json({ statuscode: 400, error: "Invalid Input" });
     }
     const result = divTwoNumber(n1, n2);
+    res.json({ statuscocde: 200, data: result });
+  } catch (error) {
+    return res.status(400).json({ statuscode: 400, error: error.message });
+  }
+});
+
+// exponentiation of two numbers REST API
+app.get("/exponent", (req, res) => {
+  try {
+    const n1 = parseInt(req.query.n1);
+    const n2 = parseInt(req.query.n2);
+    if (!checkForValidInput(n1, n2)) {
+      return res.status(400).json({ statuscode: 400, error: "Invalid Input" });
+    }
+    const result = expTwoNumber(n1, n2);
+    res.json({ statuscocde: 200, data: result });
+  } catch (error) {
+    return res.status(400).json({ statuscode: 400, error: error.message });
+  }
+});
+// square root of a number REST API
+app.get("/sqrt", (req, res) => {
+  try {
+    const n1 = parseInt(req.query.n1);
+    if (!checkForValidInput(n1)) {
+      return res.status(400).json({ statuscode: 400, error: "Invalid Input" });
+    }
+    const result = sqrtNumber(n1);
+    res.json({ statuscocde: 200, data: result });
+  } catch (error) {
+    return res.status(400).json({ statuscode: 400, error: error.message });
+  }
+});
+// modulo operation of two numbers REST API
+app.get("/mod", (req, res) => {
+  try {
+    const n1 = parseInt(req.query.n1);
+    const n2 = parseInt(req.query.n2);
+    if (!checkForValidInput(n1, n2)) {
+      return res.status(400).json({ statuscode: 400, error: "Invalid Input" });
+    }
+    const result = modTwoNumber(n1, n2);
     res.json({ statuscocde: 200, data: result });
   } catch (error) {
     return res.status(400).json({ statuscode: 400, error: error.message });
